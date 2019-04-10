@@ -1,0 +1,274 @@
+<!doctype html>
+<html class="no-js">
+<head>
+	<title>审批历史</title>
+	<meta charset="utf-8">
+	<script src="../assets/js/importJs.js"></script>
+	<script type="text/javascript">
+        importCss(["/weixin/assets/css/page.css"]);
+        //导入JS
+
+
+        var $modal =null;
+
+        function closeModal(){
+            if($modal){
+                $modal.modal('close');
+            }
+        }
+
+        var EventsList = function(element, options) {
+            var aryHtml=['<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="my-modal">',
+                '<div class="am-modal-dialog">',
+                '<div class="am-modal-hd">没有更多记录了.</div>',
+                '</div>',
+                '</div>']
+
+            var objBody=$("body");
+            objBody.append(aryHtml.join(""));
+
+            var $main = $('#wrapper');
+            var $list = $main.find('#events-list');
+            var $pullDown = $main.find('#pull-down');
+            var $pullDownLabel = $main.find('#pull-down-label');
+            var $pullUp = $main.find('#pull-up');
+            var topOffset = -$pullDown.outerHeight();
+            //var topOffset =0;
+            this.compiler = Handlebars.compile($('#tpi-list-item').html());
+            this.prev = this.next = this.page = options.params.page;
+            this.total = null;
+
+            this.getURL = function(params) {
+                var queries = [];
+                for (var key in  params) {
+                    if (key !== 'page' && key !='callback') {
+                        queries.push(key + '=' + params[key]);
+                    }
+                }
+                queries.push('page=');
+                var rtn= options.url + '?' + queries.join('&');
+
+                return rtn;
+            };
+
+            this.renderList = function(start, type) {
+
+                var _this = this;
+                var $el = $pullDown;
+                //var $el = $pullUp;
+
+                if (type === 'load') {
+                    $el = $pullUp;
+                }
+
+                $.get(this.URL + start).then(function(data) {
+                        if(options.params.callback!=null) {
+                            options.params.callback(data);
+                        }
+
+                        _this.total = data.total;
+                        var html = _this.compiler(data.rowList);
+
+                        if (type === 'refresh') {
+                            $list.html(html);
+                        } else if (type === 'load') {
+                            $list.append(html);
+                        } else {
+                            $list.html(html);
+                        }
+
+                        // refresh iScroll
+                        setTimeout(function() {
+                            _this.iScroll.refresh();
+                        }, 300);
+                    },
+                    function() {
+                        console.log('Error...')
+                    }).always(function() {
+
+                    _this.resetLoading($el);
+
+                    if (type !== 'load') {
+                        _this.iScroll.scrollTo(0, topOffset, 800, $.AMUI.iScroll.utils.circular);
+                    }
+                });
+            };
+
+            this.setLoading = function($el) {
+                $el.addClass('loading');
+            };
+
+            this.resetLoading = function($el) {
+                $el.removeClass('loading');
+            };
+
+            this.init = function() {
+                var myScroll = this.iScroll = new $.AMUI.iScroll('#wrapper', {
+                    click: true
+                });
+                // myScroll.scrollTo(0, topOffset);
+                var _this = this;
+                var pullFormTop = false;
+                var pullStart;
+
+                this.URL = this.getURL(options.params);
+                this.renderList(options.params.page);
+
+                myScroll.on('scrollStart', function() {
+                    if (this.y >= topOffset) {
+                        pullFormTop = true;
+                    }
+                    pullStart = this.y;
+                });
+
+                myScroll.on('scrollEnd', function() {
+                    if (pullFormTop && this.directionY === -1) {
+                        _this.handlePullDown();
+                    }
+                    pullFormTop = false;
+
+                    console.info("pullStart:" + pullStart +",this.y" + this.y +",directionY:" +this.directionY);
+
+                    // pull up to load more
+                    if (pullStart === this.y && (this.directionY === 1)) {
+                        _this.handlePullUp();
+                    }
+                });
+                $(".am-list").css("min-height",document.documentElement.clientHeight-50);
+            };
+
+
+
+            this.handlePullDown = function() {
+                this.setLoading($pullDown);
+                this.prev =this.next=1 ;
+
+                this.renderList(this.prev, 'refresh');
+            };
+
+        };
+
+
+
+	</script>
+
+
+	<script type="text/javascript">
+        $(function() {
+            var taskId=HtUtil.getParameter("taskId");
+            var runId=HtUtil.getParameter("runId");
+            var url_p = __ctx +"/platform/bpm/taskOpinion/opinionListJson.ht";
+            var url=url_p + "?taskId=" + taskId;
+            var $wrapperList=$("#events-list");
+            var tpl = $('#tpi-list-item').html();
+            var template = Handlebars.compile(tpl);
+            if(runId){
+                url_p = __ctx +"/platform/bpm/taskOpinion/listJson.ht";
+                url=url_p + "?runId=" + runId;
+            }
+            $.get(url,function(data){
+                var tmp=template(data);
+                $wrapperList.html(tmp);
+            });
+
+            var app = new EventsList(null, {
+                url: url_p,
+                params: {
+                    taskId: taskId,
+                    runId: runId,
+                    callback:function(data){
+                        data.total = data['taskOpinionList'].length;
+                        data.rowList = data['taskOpinionList'];
+                    }
+                }
+            });
+            app.init();
+
+            document.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, false);
+        });
+
+        Handlebars.registerHelper("ifExeUserId",function(exeUserId,options){
+            if(exeUserId){
+                //满足添加继续执行
+                return options.fn(this);
+            }else{
+                //不满足条件执行{{else}}部分
+                return options.inverse(this);
+            }
+        });
+
+	</script>
+	<style type="text/css">
+		li.title {font-weight: bold;}
+		li.title  li {font-weight: normal;list-style-type:none;}
+	</style>
+</head>
+<body>
+
+<div class="page">
+	<header data-am-widget="header" class="am-header am-header-default">
+		<div class="am-header-left am-header-nav">
+			<span class="am-icon-chevron-left" id="btn-back" onclick="history.back();"></span>
+		</div>
+		<h1 class="am-header-title" id="colTitle">
+			审批历史
+		</h1>
+		<div class="am-header-right am-header-nav">
+			<a href="../index.html" class=""  title="返回主页" >
+				<i class="am-header-icon fa fa-home" ></i>
+			</a>
+		</div>
+	</header>
+
+	<div id="wrapper" data-am-widget="list_news"
+		 class="am-list-news am-list-news-default">
+		<div class="am-list-news-bd">
+			<div class="pull-action loading" id="pull-down">
+        	<span class="am-icon-arrow-down pull-label"
+				  id="pull-down-label"> 下拉刷新</span>
+				<span class="am-icon-spinner am-icon-spin"></span>
+			</div>
+
+			<ul class="am-list" id="events-list">
+				<li class="am-list-item-desced">
+					<div class="am-list-item-text">正在加载内容... </div>
+				</li>
+			</ul>
+
+		</div>
+	</div>
+</div>
+
+<script type="text/x-handlebars-template" id="tpi-list-item">
+	{{#each this}}
+	<li class="title">{{taskName}}
+		{{#with list}}
+		{{#each this}}
+		<ul>
+			<li>执行人:
+				{{#ifExeUserId exeUserId}}
+				{{exeFullname}}
+				{{else}}
+				{{#if candidateUsers}}
+				{{#each candidateUsers}}
+				<span>{{fullname}}</span>
+				{{/each}}
+				{{/if}}
+				{{/ifExeUserId}}
+
+			</li>
+			<li>开始时间:{{startTimeStr}}</li>
+			<li>结束时间:{{endTimeStr}}</li>
+			<li>状态:{{{status}}}</li>
+			<li>意见:{{opinion}}</li>
+		</ul>
+		{{/each}}
+		{{/with}}
+	</li>
+	{{/each}}
+</script>
+
+</body>
+</html>

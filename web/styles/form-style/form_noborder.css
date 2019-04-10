@@ -1,0 +1,42 @@
+table.formTable{
+    border: 0px;
+}
+table.formTable td {
+	position: relative;
+	color: #5f5f5f;
+	font-size: 14px;
+	background-color: #ffffff;
+	border: 0px;
+}
+td.formHead {
+	border: 0px;
+	background: none;
+	color: #42a5f5!important;
+	border-bottom: 4px solid #42a5f5!important;
+	font-size: 16px!important;
+}
+table.formTable label{
+	vertical-align:middle;
+	margin-right:10px;
+}
+table.formTable input,table.formTable select {
+	/*width:100%!important;*/
+	border: 0px !important;
+	border-bottom: 1px solid #ddd !important;   
+	border-radius: 1px !important;
+	height:21px!important;
+}
+table.formTable input:focus,table.formTable select:focus{
+	outline:none;
+	border-bottom: 1px solid #42a5f5!important;
+}
+/*table.formTable input[type="radio"]{
+	width: 15px!important;
+	vertical-align: -5px;
+}*/
+table.formTable input[type="radio"], table.formTable input[type="checkbox"] {
+    width:15px!important;
+    vertical-align: middle;
+}
+<span id="_baidu_bookmark_start_4" style="line-height: 0px; display: none;"></span>
+<span id="_baidu_bookmark_start_7" style="line-height: 0px; display: none;"></span>

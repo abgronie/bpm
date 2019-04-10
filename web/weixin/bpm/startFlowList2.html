@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>发起流程</title>
+<script src="../assets/js/importJs.js"></script>
+<script type="text/javascript">
+
+importCss(["/weixin/assets/js/ztree/css/zTreeStyle/zTreeStyle.css",
+           "/weixin/assets/js/ztree/css/outLook.css",
+           "/weixin/assets/css/app.css"]);
+
+importJs(["/weixin/assets/js/ztree/js/jquery.ztree.all-3.5.min.js",
+          "/weixin/assets/js/ztree/ZtreeCreator.js"]);
+
+$(function() {
+	var url=__ctx +"/weixin/bpm/getMyDef.ht";
+	$.get(url,function(data){
+		if(data != null && data.length > 0){
+			var flowsxHtml = "";
+			for(var i = 0; i<data.length; i++){
+				var icoNum = (i+1)%13;
+				flowsxHtml += "<li class='am-g am-list-item-dated'>" +
+			        "<a href='startFlow.html?defId="+data[i].defId+"&flowKey="+data[i].defKey+"&actDefId="+data[i].actDefId+"&subject="+data[i].subject+"'" +
+			        "    class='am-list-item-hd'>" +
+			        "     <img src='"+__ctx+"/styles/default/images/ico/ico"+icoNum+".png' width='70' height='70'>" +
+			        "     <span style='color: #080808'>" +
+			             data[i].subject+
+			        "     </span>" +
+			        " </a>" +
+			    " </li>";
+			}
+			$("#wrapperList").html(flowsxHtml);
+		}
+	});
+});
+
+</script>
+
+<style type="text/css">
+#wrapperList  a::after{
+	display:inline-block;
+	font:normal normal normal 1.6rem/1 FontAwesome,sans-serif;
+	font-size:inherit;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	transform:translate(0,0);
+	content:"\f054";
+	position:absolute;
+	right:10px;
+	color:#ccc;
+	top:50%;
+	margin-top:-8px
+}
+</style>
+
+</head>
+<body>
+	<header data-am-widget="header" class="am-header am-header-default am-header-fixed">
+		<div class="am-header-left am-header-nav">
+			<span class="am-icon-chevron-left" id="btn-back" onclick="history.back();"></span>
+		</div>
+		<h1 class="am-header-title">
+			<a href="#" class="" id="columnTitle" >发起流程 </a>
+		</h1>
+		
+		<div class="am-header-right am-header-nav">
+          <a href="index.html" class=""  title="返回主页" >
+                <i class="am-header-icon fa fa-home" ></i>
+          </a>
+      	</div>
+	</header>
+
+	<div class="am-tabs" data-am-tabs="{noSwipe: 0}" id="tabs">
+	  <div class="am-tabs-bd">
+	    <div class="am-tab-panel  am-active am-in">
+	    	 <ul class="am-list" id="wrapperList" style="min-height: 200px">
+	    	 	
+	    	 </ul>
+	    </div>
+	   
+	  </div>
+	</div>
+</body>
+</html>

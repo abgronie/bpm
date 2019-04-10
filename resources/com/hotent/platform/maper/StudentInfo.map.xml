@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.hotent.platform.model.system.StudentInfo">
+	<resultMap id="StudentInfo" type="com.hotent.platform.model.system.StudentInfo">
+		<result property="xh" column="xh"/>
+		<result property="xb" column="xb"/>
+		<result property="nj" column="nj"/>
+		<result property="sfzh" column="sfzh"/>
+		<result property="lxdh" column="lxdh"/>
+		<result property="xz" column="xz"/>
+		<result property="dzyx" column="dzyx"/>
+		<result property="sjhm" column="sjhm"/>
+		<result property="mzmc" column="mzmc"/>
+		<result property="zzmmmc" column="zzmmmc"/>
+		<result property="rxrq" column="rxrq"/>
+		<result property="byny" column="byny"/>
+		<result property="ssbh" column="ssbh"/>
+		<result property="qsdh" column="qsdh"/>
+		<result property="ssch" column="ssch"/>
+		<result property="yhkh" column="yhkh"/>
+		<result property="yhmc" column="yhmc"/>
+		
+		<result property="gh" column="gh"/>
+		<result property="xm" column="xm"/>
+		<result property="bmmc" column="bmmc"/>
+		<result property="csrq" column="csrq"/>
+		<result property="xl" column="xl"/>
+		<result property="xw" column="xw"/>
+		<result property="zy" column="zy"/>
+		<result property="zc" column="zc"/>
+		<result property="zw" column="zw"/>
+		<result property="xk" column="xk"/>
+		<result property="jbxsj" column="jbxsj"/>
+		<result property="sccjgzsj" column="sccjgzsj"/>
+		
+		<result property="bjmc" column="bjmc"/>
+		<result property="dwmc" column="dwmc"/>
+	</resultMap>
+	
+	
+	<select id="getStuentInfoByAccount" parameterType="java.lang.String" resultMap="StudentInfo">
+		SELECT XB,NJ,SFZH,LXDH,XZ,DZYX,SJHM,MZMC,ZZMMMC,RXRQ,BYNY,SSBH,QSDH,SSCH,YHKH,YHMC 
+		from sys_xsxxb 
+		where xh=#{account}
+	</select>
+	
+	<select id="getJbxxByAccount" parameterType="java.lang.String" resultMap="StudentInfo">
+		SELECT *
+		from jbxxb 
+		where gh=#{account}
+	</select>
+	
+	<select id="getGzdxJbxxByAccount" parameterType="java.lang.String" resultMap="StudentInfo">
+		SELECT *
+		from view_gxxs_xsjbsjzlb 
+		where xh=#{account}
+	</select>
+</mapper>

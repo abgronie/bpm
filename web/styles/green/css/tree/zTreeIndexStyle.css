@@ -1,0 +1,134 @@
+/*-------------------------------------
+zTree Style
+
+version:	3.4
+author:		Hunter.z
+email:		hunter.z@263.net
+website:	http://code.google.com/p/jquerytree/
+
+-------------------------------------*/
+li{outline:none;}
+.ztree * { margin:0;padding:0;  font-size:14px; 
+ }
+.ztree {
+	line-height: 40px; font-size: 14px;color: #26323f;background-color: #E3F5E3;
+	}
+.ztree li:after {content: "."; display: block; height:0; clear:both; visibility: hidden;}
+.ztree li{*zoom:1;}
+/* .ztree li{ padding-top: 5px; margin:0; list-style:none; line-height:14px; text-align:left; white-space:nowrap; outline:0;} */
+.ztree li ul{ margin:0; padding:0 0 0 18px}
+.ztree li ul.line{ /*background:url(./img/line_conn.gif) 0 0 repeat-y;*/}
+
+/* .ztree li a {padding:3px 3px 3px 0; margin:0; cursor:pointer; height:17px; color:#333; background-color: transparent;
+	text-decoration:none; vertical-align:top; display: inline-block;margin-left:-300px;padding-left:300px;   width: 90%;}
+.ztree li a:hover {text-decoration:none; background: #c3dbff; opacity: 0.8;filter:alpha(opacity=80)} */
+/* .ztree li a.curSelectedNode {padding-top:0px; background-color:#99c2ff ; color:black; height:16px; border:1px #1a6ebb solid; opacity:0.8;} */
+/* .ztree li a.curSelectedNode_Edit {padding-top:0px; background-color:#FFE6B0; color:black; height:16px; border:1px #FFB951 solid; opacity:0.8;}
+.ztree li a.tmpTargetNode_inner {padding-top:0px; background-color:#316AC5; color:white; height:16px; border:1px #316AC5 solid;
+	opacity:0.8; filter:alpha(opacity=80)}
+.ztree li a.tmpTargetNode_prev {}
+.ztree li a.tmpTargetNode_next {}
+.ztree li a input.rename {height:14px; width:80px; padding:0; margin:0;
+	font-size:12px; border:1px #7EC4CC solid; *border:0px} */
+.ztree li span {line-height:40px;height:40px}
+/* .ztree li span.button {line-height:0; margin:0; width:16px; height:16px; display: inline-block; vertical-align:middle;
+	border:0 none; cursor: pointer;outline:none;
+	background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+	background-image:url("./img/zTreeStandard.png"); *background-image:url("./img/zTreeStandard.gif")} */
+
+.ztree li span.button.chk {width:13px; height:13px; margin:0 3px 0 0; cursor: auto}
+.ztree li span.button.chk.checkbox_false_full {background-position:0 0}
+.ztree li span.button.chk.checkbox_false_full_focus {background-position:0 -14px}
+.ztree li span.button.chk.checkbox_false_part {background-position:0 -28px}
+.ztree li span.button.chk.checkbox_false_part_focus {background-position:0 -42px}
+.ztree li span.button.chk.checkbox_false_disable {background-position:0 -56px}
+.ztree li span.button.chk.checkbox_true_full {background-position:-14px 0}
+.ztree li span.button.chk.checkbox_true_full_focus {background-position:-14px -14px}
+.ztree li span.button.chk.checkbox_true_part {background-position:-14px -28px}
+.ztree li span.button.chk.checkbox_true_part_focus {background-position:-14px -42px}
+.ztree li span.button.chk.checkbox_true_disable {background-position:-14px -56px}
+.ztree li span.button.chk.radio_false_full {background-position:-28px 0}
+.ztree li span.button.chk.radio_false_full_focus {background-position:-28px -14px}
+.ztree li span.button.chk.radio_false_part {background-position:-28px -28px}
+.ztree li span.button.chk.radio_false_part_focus {background-position:-28px -42px}
+.ztree li span.button.chk.radio_false_disable {background-position:-28px -56px}
+.ztree li span.button.chk.radio_true_full {background-position:-42px 0}
+.ztree li span.button.chk.radio_true_full_focus {background-position:-42px -14px}
+.ztree li span.button.chk.radio_true_part {background-position:-42px -28px}
+.ztree li span.button.chk.radio_true_part_focus {background-position:-42px -42px}
+.ztree li span.button.chk.radio_true_disable {background-position:-42px -56px}
+
+.ztree li span.button.switch {width:18px; height:18px;position: relative;
+    z-index: 100;}
+.ztree li span.button.root_open{background-position:-92px -54px}
+.ztree li span.button.root_close{background-position:-74px -54px}
+.ztree li span.button.roots_open{background-position:-92px 0}
+.ztree li span.button.roots_close{background-position:-74px 0}
+.ztree li span.button.center_open{width: 15px; height: 40px;position:absolute; /*left:0;*/ top:0;  background:url(./img/menu_minus.png) no-repeat left center;cursor: pointer;}
+.ztree li span.button.center_close{width: 15px; height: 40px;position:absolute; /*left:0;*/ top:0; background:url(./img/menu_plus.png) no-repeat left center;cursor: pointer;}
+.ztree li span.button.bottom_open{background-position:-92px -36px}
+.ztree li span.button.bottom_close{background-position:-74px -36px}
+.ztree li span.button.noline_open{background-position:-92px -72px}
+.ztree li span.button.noline_close{background-position:-74px -72px}
+.ztree li span.button.root_docu{ background:none;}
+.ztree li span.button.roots_docu{background-position:-56px 0}
+.ztree li span.button.center_docu{background-position:-56px -18px}
+.ztree li span.button.bottom_docu{background-position:-56px -36px}
+.ztree li span.button.noline_docu{ background:none;}
+
+.ztree li span.button.ico_open{margin-right:2px; background-position:-110px -16px; vertical-align:top; *vertical-align:middle}
+.ztree li span.button.ico_close{margin-right:2px; background-position:-110px 0; vertical-align:top; *vertical-align:middle}
+.ztree li span.button.ico_docu{margin-right:2px; background-position:-110px -32px; vertical-align:top; *vertical-align:middle}
+.ztree li span.button.edit {margin-right:2px; background-position:-110px -48px; vertical-align:top; *vertical-align:middle}
+.ztree li span.button.remove {margin-right:2px; background-position:-110px -64px; vertical-align:top; *vertical-align:middle}
+
+.ztree li span.button.ico_loading{margin-right:2px; background:url(./img/loading.gif) no-repeat scroll 0 0 transparent; vertical-align:top; *vertical-align:middle}
+
+ul.tmpTargetzTree {background-color:#FFE6B0; opacity:0.8; filter:alpha(opacity=80)}
+
+span.tmpzTreeMove_arrow {width:16px; height:16px; display: inline-block; padding:0; margin:2px 0 0 1px; border:0 none; position:absolute;
+	background-color:transparent; background-repeat:no-repeat; background-attachment: scroll;
+	background-position:-110px -80px; background-image:url("./img/zTreeStandard.png"); *background-image:url("./img/zTreeStandard.gif")}
+
+ul.ztree.zTreeDragUL {margin:0; padding:0; position:absolute; width:auto; height:auto;overflow:hidden; background-color:#cfcfcf; border:1px #00B83F dotted; opacity:0.8; filter:alpha(opacity=80)}
+.zTreeMask {z-index:10000; background-color:#cfcfcf; opacity:0.0; filter:alpha(opacity=0); position:absolute}
+
+/* level style*/
+/*.ztree li span.button.level0 {
+	display:none;
+}
+.ztree li ul.level0 {
+	padding:0;
+	background:none;
+}*/
+
+.level0{padding: 0 15px; margin-bottom:1px; clear: both; position: relative;}
+.level0 a.level0{padding: 0px; margin-bottom: 0px; clear: both; position: relative;}
+.level0 span.level0{padding: 0px; margin-bottom: 0px; clear: both; position: relative;}
+.level0.current{background: #BADFC9;}
+.level0:hover{background: #BADFC9;}
+.level0 a{height: 40px; color: #26323f; clear: both;width: 300px;}
+li span.button.center_open.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_open.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.center_close.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_close.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.roots_open.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_open.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.roots_close.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_close.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.bottom_open.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_open.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.bottom_close.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_close.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.noline_open.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_open.png) no-repeat right center; position: relative; cursor:pointer;}
+li span.button.noline_close.level0{width: 10px; height: 40px; float: right; background:url(./img//menu_list_close.png) no-repeat right center; position: relative; cursor:pointer;}
+li.level0 span.button.ico_open{width: 22px; height: 40px; float: left; background-position: left center; background-repeat: no-repeat;}
+li.level0 span.button.ico_close{width: 22px; height: 40px; float: left; background-position: left center; background-repeat: no-repeat;}
+li.level0 span.button.ico_docu{width: 12px; height: 40px; float: left; background-position: left center; background-repeat: no-repeat; position: relative;z-index: 50;}
+li ul.level0{padding-left: 22px; clear: both;}
+li ul.level1,li ul.level2{padding-left: 15px; clear: both;}
+li ul.level0 li{margin-top: 1px; position: relative;}
+li ul.level0>li.current,li ul.level0>li.current>a:hover{padding-left:32px; width: 300px; border-left: 5px solid #69af69; background: #9bcd9b; margin-left: -37px;}
+li ul.level0>li>a{padding-left:37px; width: 300px; margin-left: -37px; height: 40px; display: inline-block;}
+li ul.level0>li>a:hover{ background: #9bcd9b;}
+li ul.level1>li.current,li ul.level1>li.current>a:hover{padding-left:47px; width: 300px; border-left: 5px solid #69af69; background: #9bcd9b; margin-left: -52px;}
+li ul.level1>li>a{padding-left:52px; width: 300px; margin-left: -52px; height: 40px; display: inline-block;}
+li ul.level1>li>a:hover{background: #9bcd9b;}
+li ul.level2>li.current,li ul.level2>li.current>a:hover{padding-left:62px; width: 300px; border-left: 5px solid #69af69; background: #9bcd9b; margin-left: -67px;}
+li ul.level2>li>a{padding-left:67px; width: 300px; margin-left: -67px; height: 40px; display: inline-block;}
+li ul.level2>li>a:hover{background: #9bcd9b;}
+span.button.ico_docu.menu_end{width: 15px; height: 40px; float: left; background:url(./img/menu_end.png) no-repeat 1px center;}

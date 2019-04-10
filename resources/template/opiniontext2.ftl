@@ -1,0 +1,1 @@
+<#if opinion.opinion??> ${opinion.opinion}<#else>无</#if>

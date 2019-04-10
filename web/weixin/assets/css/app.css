@@ -1,0 +1,47 @@
+html,body{height:100%}
+
+
+.am-thumbnails li{
+	text-decoration: none;
+	text-align: center;
+	
+}
+
+.am-thumbnails a{
+	text-decoration: none;
+}
+
+.am-icon-btn.am-lg{
+	 width: 60px;
+  height: 60px;
+  font-size:36px;
+  line-height: 60px;
+}
+
+
+.am-icon-share-alt-square{ 
+	margin-bottom:5px;
+  .am-icon-font; 
+  content: @fa-var-share-alt-square;
+}
+
+.am-navbar-nav  li a  span{
+	margin-top: 5px;
+}
+
+
+.am-list  a::after{
+	display:inline-block;
+	font:normal normal normal 1.6rem/1 FontAwesome,sans-serif;
+	font-size:inherit;
+	text-rendering:auto;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+	transform:translate(0,0);
+	content:"\f054";
+	position:absolute;
+	right:10px;
+	color:#ccc;
+	top:50%;
+	margin-top:-8px
+}

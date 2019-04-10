@@ -1,0 +1,68 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<title>流程图</title>
+<meta charset="utf-8">
+<script src="../assets/js/importJs.js"></script>
+<script type="text/javascript">
+	importCss(["/weixin/assets/css/page.css"]);
+	//导入JS
+	importJs(["/weixin/assets/js/pageScroll.js"]);
+</script>
+
+
+<script type="text/javascript">
+$(function() {
+	var runId=HtUtil.getParameter("runId");
+	var taskId=HtUtil.getParameter("taskId");
+	var url;
+	if(runId){
+		url=__ctx +"/bpmImage?runId="+HtUtil.getParameter("runId");
+	}else if(taskId){
+		url=__ctx +"/bpmImage?taskId="+HtUtil.getParameter("taskId");
+	}
+	
+	
+	//将html 添加至页面中
+	var w=window.innerWidth;
+	var h=window.innerHeight-50;
+ 	var iframe ='<iframe  src="'+url +'" style="height:100%;width:100%;"></iframe>';
+// 	var iframe ='<iframe  src="'+url +'" style="height:'+h+'px;"></iframe>';
+	var $wrapperList=$("#contentDiv");
+	
+	$wrapperList.width(function(){return "100%";});
+	$wrapperList.height(function(){return "100%";});
+	$wrapperList.css("overflow-x", "scroll");
+	$wrapperList.css("-webkit-overflow-scrolling", "touch");
+	$wrapperList.html(iframe);
+});
+</script>
+
+</head>
+<body>
+
+<div class="page">
+  <header data-am-widget="header" class="am-header am-header-default">
+  	<div class="am-header-left am-header-nav">
+		<span class="am-icon-chevron-left" id="btn-back" onclick="history.back();"></span>
+	</div>
+    <h1 class="am-header-title" id="colTitle">
+      	流程图
+    </h1>
+    <div class="am-header-right am-header-nav">
+          <a href="../index.html" class=""  title="返回主页" >
+                <i class="am-header-icon fa fa-home" ></i>
+          </a>
+    </div>
+  </header>
+
+  <div id="wrapper" data-am-widget="list_news"
+       class="am-list-news am-list-news-default">
+    <div class="am-list-news-bd" id="contentDiv">
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
